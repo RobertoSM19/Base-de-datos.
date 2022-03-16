@@ -1,0 +1,75 @@
+<html>
+<head>
+    <style>
+        .entrada{
+            border-color: lightgray;
+            border-style: solid;
+            width: 100%;
+            padding: 5px;
+        }
+        .boton{
+            text-align: center;
+            border-radius: 5px;
+            border-style: solid;
+            border-color: lightgray;
+            background-color: red;
+            color: white;
+            margin-top: 5px;
+            padding: 5px;
+        }
+        .carta{
+            border-radius: 10px;
+            border-style: solid;
+            border-color: lightblue;
+            padding: 5px;
+            margin-top: 5px;
+            background-color: cyan;
+            width: 100%;
+            color: black;
+        }
+    </style>
+    <title>Base de datos.</title>
+</head>
+<body>
+        <label>Nombre de la droga:</label><br>
+        <input class="entrada" type="text" id="nombre"><br>
+        <label>Descripción de la droga:</label><br>
+        <input class="entrada" type="text" id="descripcion"><br>
+        <label>Efectos de la droga:</label><br>
+        <input class="entrada" type="text" id="efectos"><br>
+        <label>Foto de la droga:</label><br>
+        <input class="entrada" type="text" id="foto"><br>
+        <button onclick="agregarDroga()" class="boton">Agregar</button>
+        <p id="lineas"></p>
+        <script>
+            let drogas=[];
+            function mostrarDrogas(){
+                let linea='';
+                for(i in drogas){
+                    linea+="<div class='carta'>"+i+"<br>"+"<b>Nombre de la droga:</b>"+drogas[i].nombre+"<br>"+"<b>Descripción de la droga:</b>"+drogas[i].desc+"<br>"+"<b>Efectos de la droga:</b>"+drogas[i].efectos+"<br>"+"<b>Imagen de la droga:</b>"+"<br>"+'<img src="'+drogas[i].foto+'">'+"</div>";
+                    document.getElementById('lineas').innerHTML=linea;
+                }
+            }
+
+            function agregarDroga(){
+                let nombre=document.getElementById('nombre').value;
+                let desc=document.getElementById('descripcion').value;
+                let efectos=document.getElementById('efectos').value;
+                let foto=document.getElementById('foto').value;
+                if(!!nombre && !!desc && !!efectos && !!foto){
+                    drogas.push({"nombre":nombre,
+                        "desc":desc,
+                        "efectos":efectos,
+                        "foto":foto});
+                    mostrarDrogas();
+                    document.getElementById('nombre').value='';
+                    document.getElementById('descripcion').value='';
+                    document.getElementById('efectos').value='';
+                    document.getElementById('foto').value='';
+                }else{
+                    alert("Error al capturar datos")
+                }
+            }
+    </script>
+</body>
+</html>
